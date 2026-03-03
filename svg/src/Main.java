@@ -1,10 +1,29 @@
+import java.sql.SQLOutput;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello and welcome!");
+        Point p1 = new Point();
+        p1.x=50.0;
+        p1.y=50.0;
+        System.out.println(p1);
 
-        for (int i = 1; i <= 5; i++) {
-            System.out.println("i = " + i);
-        }
+        System.out.println(p1.toSvg());
+
+        p1.translate(10,-20);
+        System.out.println(p1);
+        System.out.println(p1.toSvg());
+
+        Point p2=p1.translated(-30,40);
+        System.out.println(p2);
+        System.out.println(p2.toSvg());
+
+        Segment s1= new Segment();
+        s1.a=p1;
+        s1.b=p2;
+
+        System.out.println("Długość s1= "+ s1.leangth());
+        System.out.println(s1);
+
+        System.out.println(s1.toSvg());
     }
 }
