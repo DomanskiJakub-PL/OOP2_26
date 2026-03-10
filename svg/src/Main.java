@@ -1,9 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        Point p1 = new Point();
-        p1.setX(50.0);
-        p1.setY(50.0);
+        Point p1 = new Point(50,50);
         System.out.println(p1);
 
         System.out.println(p1.toSvg());
@@ -26,31 +24,15 @@ public class Main {
         System.out.println(s1.toSvg());
         Segment[] segments = new Segment[3];
         segments[0]= new Segment();
-        segments[0].a=new Point();
-        segments[0].b=new Point();
-
-        segments[0].a.setX(0);
-        segments[0].a.setY(0);
-        segments[0].b.setX(0);
-        segments[0].b.setY(40);
+        segments[0].a=new Point(0,0);
+        segments[0].b=new Point(0,40);
         System.out.println(segments[0]);
 
         segments[1]=s1;
-        segments[1]= new Segment();
-        segments[1].a=new Point();
-        segments[1].b=new Point();
-        segments[1].a.setX(0);
-        segments[1].a.setY(0);
-        segments[1].b.setX(33);
-        segments[1].b.setY(0);
 
         segments[2]= new Segment();
-        segments[2].a=new Point();
-        segments[2].b=new Point();
-        segments[2].a.setX(0);
-        segments[2].a.setY(0);
-        segments[2].b.setX(33);
-        segments[2].b.setY(0);
+        segments[2].a=new Point(0,0);
+        segments[2].b=new Point(33,0);
         Segment max =Segment.maxLength(segments);
         System.out.println("najdluzszy: "+ max);
 
