@@ -1,5 +1,11 @@
 public class Segment {
     private Point a, b;
+
+    public Segment(Point a,Point b) {
+        this.a = a;
+        this.b = b;
+    }
+
     public double leangth(){
         double dx = b.getX() - a.getX();
         double dy= b.getY() - a.getY();
