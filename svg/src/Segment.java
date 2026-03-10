@@ -1,8 +1,8 @@
 public class Segment {
     public Point a, b;
     public double leangth(){
-        double dx =b.x - a.x;
-        double dy= b.y - a.y;
+        double dx = b.getX() - a.getX();
+        double dy= b.getY() - a.getY();
         return Math.sqrt(dx*dx+dy*dy);
     }
     @Override
@@ -10,7 +10,7 @@ public class Segment {
         return "Segment{"+ "a=" +a + ", b= "+b+"}";
     }
     public String toSvg(){
-        return "<line x1=\""+a.x+"\" y1=\""+a.y+"\" x2=\""+b.x+"\" y2=\""+b.y+"\"style=\"stroke:red;stroke-width:2\"   />";
+        return "<line x1=\""+ a.getX() +"\" y1=\""+ a.getY() +"\" x2=\""+ b.getX() +"\" y2=\""+ b.getY() +"\"style=\"stroke:red;stroke-width:2\"   />";
     }
     public static Segment maxLength(Segment[] segments){
         if(segments==null || segments.length ==0) return null;

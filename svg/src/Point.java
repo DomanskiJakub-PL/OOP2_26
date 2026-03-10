@@ -1,22 +1,48 @@
 public class Point {
-    public double x ,y;
+    private double x;
+    private double y;
+    
+    //akcesor (getter)
+    public double getX(){
+        return x;
+    }
+    //mutator
+    public void SetX(double a){
+        setX(a);
+    } //akcesor (getter)
+    public double getY(){
+        return y;
+    }
+    //mutator
+    public void SetY(double a){
+        setX(a);
+    }
+    
     @Override
     public String toString(){
-        return "("+this.x+","+this.y+")";
+        return "("+ this.getX() +","+ this.getY() +")";
     }
     public String toSvg(){
-        return"<circle r=\"2\" cx=\""+ this.x+"\"  " +
-                "cy=\""+ this.y + "\" fill=\"red\" />";
+        return"<circle r=\"2\" cx=\""+ this.getX() +"\"  " +
+                "cy=\""+ this.getY() + "\" fill=\"red\" />";
     }
 
     public void translate(double dx, double dy){
-        x+=dx;
-        this.y +=dy;
+        setX(getX() + dx);
+        this.setY(this.getY() + dy);
     }
     public Point translated(double dx, double dy){
      Point newPoint=new Point();
-     newPoint.x=x+dx;
-     newPoint.y=y+dy;
+     newPoint.setX(getX() +dx);
+     newPoint.setY(getY() +dy);
      return newPoint;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 }
