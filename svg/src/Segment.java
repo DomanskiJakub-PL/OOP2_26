@@ -2,8 +2,8 @@ public class Segment {
     private Point a, b;
 
     public Segment(Point a,Point b) {
-        this.a = a;
-        this.b = b;
+        this.a = new Point(a);
+        this.b = new Point(b);
     }
 
     public double leangth(){
