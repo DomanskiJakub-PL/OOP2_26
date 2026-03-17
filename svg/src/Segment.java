@@ -1,5 +1,5 @@
 public class Segment {
-    private Point a, b;
+    final private Point a, b;
 
     public Segment(Point a,Point b) {
         this.a = new Point(a);
@@ -21,14 +21,13 @@ public class Segment {
     public static Segment maxLength(Segment[] segments){
         if(segments==null || segments.length ==0) return null;
         Segment max=segments[0];
-        for(int i=0;i< segments.length;i++){
+        for (Segment seg : segments) {
 
 
-            Segment seg= segments[i];
-            if(seg == null) continue;
-            if(seg.leangth()>max.leangth()) return max;
-            max=seg;
+            if (seg == null) continue;
+            if (seg.leangth() > max.leangth()) return max;
+            max = seg;
         }
         return max;
-    };
+    }
 }

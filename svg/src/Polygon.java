@@ -2,9 +2,12 @@ import java.util.Arrays;
 import java.util.Locale;
 
 public class Polygon {
-    private Point[] points;
+    private final Point[] points;
     Polygon(Point[] points){
-        this.points=points;
+        this.points=new Point[points.length];
+        for(int i=0; i< points.length;i++){
+            this.points[i]=new Point(points[i]);
+        }
     }
 
     @Override
@@ -14,10 +17,10 @@ public class Polygon {
                 '}';
     }
     public String toSVG(){
-        String pointsString="";
+        StringBuilder pointsString= new StringBuilder();
         for(Point p: points){
-            pointsString+=String.format(Locale.ENGLISH,"%f,%f ",p.getX(), p.getY());
+            pointsString.append(String.format(Locale.ENGLISH, "%f,%f ", p.getX(), p.getY()));
         }
-        return String.format("polygon points=\"%s\"",pointsString);
+        return String.format("polygon points=\"%s\"", pointsString.toString());
     }
 }
