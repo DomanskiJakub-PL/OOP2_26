@@ -30,5 +30,6 @@ public class Main2 {
                 new Point(80,160)
         }));
         System.out.println(scene.toSvg());
+        scene.save("obrazek.svg");
     }
 }
