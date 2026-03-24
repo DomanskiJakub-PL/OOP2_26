@@ -5,53 +5,65 @@ import java.util.Locale;
 
 public class SvgScene {
     private Polygon[] polygons;
-    private int i;
+    private int i;  // index pod który wstawić kolejny obiekt
 
-    public SvgScene(){
-        polygons=new Polygon[3];
-        i=0;
-    }
-    public void addPolygon(Polygon poly){
-        polygons[i] = poly;
-        i= ( i + 1 ) % 3;
-    }
-
-    private BoundingBox boundingBox(){
-        double minWidth=0;
-        double minHeight=0;
-        for(Polygon poly: polygons){
-            if(poly == null) continue;
-             BoundingBox bb =poly.boundingBox();
-             double width = bb.x() + bb.width();
-             if(width>minWidth) minWidth = width;
-             double height = bb.y() + bb.height();
-             if(height>minHeight) minHeight = height;
-        }
-        return new BoundingBox(0,0,minWidth,minHeight);
-    }
-    public void save(String filename){
+    public void save(String fileName) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+
             BoundingBox bb = boundingBox();
-            String svg = String.format(Locale.ENGLISH, "<svg height=\"%f\" width=\"%f\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-                    "  <polygon points=\"100,10 150,190 50,190\" style=\"fill:lime;stroke:purple;stroke-width:3\" />\n", bb.height(),bb.width());
+            // na początku znacznik otwierający svg
+            String svg = String.format(
+                    Locale.ENGLISH,
+                    "<svg height=\"%f\" width=\"%f\" xmlns=\"http://www.w3.org/2000/svg\">\n",
+                    bb.height(), bb.width()
+            );
             writer.write(svg);
-
+            // elementy rysunku
             writer.write(this.toSvg());
-
-            svg="</svg>";
+            // na końcu znacznik zamykający svg
+            svg = "</svg>";
             writer.write(svg);
 
             writer.close();
-        } catch (IOException e){
-            System.err.printf("Nie udało się otworzyć pliku: %s%n", e.getMessage());
+            System.out.println("Zapisano do pliku " + fileName);
+        } catch (IOException e) {
+            System.err.println("Nie udało się otworzyć pliku: " + e.getMessage());
         }
     }
-    public String toSvg(){
-        String svg="";
-        for(Polygon p : polygons){
-            if(p==null) continue;
-            svg+=p.toSVG() + "\n";
+
+    private BoundingBox boundingBox() {
+        double minWidth = 0;
+        double minHeight = 0;
+        for (Polygon poly : polygons) {
+            if (poly == null) continue;
+
+            BoundingBox bb = poly.boundingBox();
+            double width = bb.x() + bb.width();
+            if (width > minWidth) minWidth = width;
+            double height = bb.y() + bb.height();
+            if (height > minHeight) minHeight = height;
+        }
+
+        return new BoundingBox(0, 0, minWidth, minHeight);
+    }
+
+    public SvgScene() {
+        polygons = new Polygon[3];
+        i = 0;
+    }
+
+    public void addPolygon(Polygon poly) {
+        polygons[i] = poly;
+        i = (i + 1) % 3; // 0 -> 1 -> 2 -> 0 -> 1 -> ...
+    }
+
+    public String toSvg() {
+        String svg = "";
+        for (Polygon p : polygons) {
+            if (p == null) continue;
+
+            svg += p.toSvg() + "\n";
         }
         return svg;
     }
